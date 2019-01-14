@@ -21,6 +21,14 @@ The [original project](https://github.com/womeat/my-udacity-crud-project) which 
 3. The user `grader` was created with `sudo` permissions.
 4. The postgres user `besttacos` and database `besttacos` where created
 5. The script `myapp.wsgi` was and added to the mod_wsgi configuration `/etc/apache2/sites-enabled/000-default.conf`
+`myapp.wsgi`
+```
+from app import app as application
+
+import sys
+sys.path.insert(0,'/home/grader/my-udacity-crud-project');
+```
+`/etc/apache2/sites-enabled/000-default.conf`
 ```
 <VirtualHost *:80>
         ServerAdmin womeat@gmail.com
