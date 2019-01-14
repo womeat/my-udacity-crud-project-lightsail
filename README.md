@@ -66,3 +66,5 @@ SQLAlchemy Engine Configuration
 - https://docs.sqlalchemy.org/en/latest/core/engines.html
 Firewall configuration (UFW)
 - https://help.ubuntu.com/community/UFW
+AWS lightsail
+- https://lightsail.aws.amazon.com
