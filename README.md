@@ -60,11 +60,11 @@ engine = create_engine('postgres://besttacos:XXXXX@localhost:5432/besttacos')
 
 
 # References
-mod_wsgi (Apache)
-- http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/
-SQLAlchemy Engine Configuration
-- https://docs.sqlalchemy.org/en/latest/core/engines.html
-Firewall configuration (UFW)
-- https://help.ubuntu.com/community/UFW
-AWS lightsail
-- https://lightsail.aws.amazon.com
+- mod_wsgi (Apache)
+http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/
+- SQLAlchemy Engine Configuration
+https://docs.sqlalchemy.org/en/latest/core/engines.html
+- Firewall configuration (UFW)
+https://help.ubuntu.com/community/UFW
+- AWS lightsail
+https://lightsail.aws.amazon.com
