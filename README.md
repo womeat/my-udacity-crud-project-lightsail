@@ -57,7 +57,7 @@ sys.path.insert(0,'/home/grader/my-udacity-crud-project');
 ```
 engine = create_engine('postgres://besttacos:XXXXX@localhost:5432/besttacos')
 ```
-7.
+
 
 # References
 mod_wsgi (Apache)
