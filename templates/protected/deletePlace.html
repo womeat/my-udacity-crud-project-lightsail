@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+   <h3>Do you want to delete "{{place.name}}" ?</h3>
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{ url_for('deletePlace',place_id = place.id)}}" method = "post">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type ="text" class="form-control" name="name" value="{{place.name }}" readonly>
+                    <label for="urlpic">Picture URL:</label>
+                    <input type ="text" class="form-control" maxlength="255" name="urlpic" value="{{place.picture }}" readonly>
+					
+					<div class="padding-bottom text-right">
+                        <button type="submit" class="btn btn btn-danger" id="submit" type="submit">
+                        <span class="fa fa-trash-o" aria-hidden="true"></span>Delete</button>
+                        <a href = "{{url_for('showPlaces')}}">
+                            <button class="btn btn btn-secondary" type="button" >
+                            <span class="fa fa-stop" aria-hidden="true"></span> Cancel</button>
+                        </a>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

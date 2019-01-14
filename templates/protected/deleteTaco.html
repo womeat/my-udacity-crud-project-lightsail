@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+        <h1>Do you want to delete the taco "{{ taco.name }}"?</h1>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{url_for('deleteTaco',place_id=place.id, taco_id=taco.id)}}" method = "post">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type ="text" maxlength="50" class="form-control" name="name" placeholder="Taco name" value="{{taco.name }}" readonly>
+
+					<label for="description">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the taco" readonly>{{taco.description }}</textarea>
+
+                    <div class="padding-bottom text-right">
+                        <button type="submit" class="btn btn btn-danger" id="submit" type="submit">
+                        <span class="fa fa-trash-o" aria-hidden="true"></span>Delete</button>
+                        <a href = "{{url_for('showTacos',place_id=place.id)}}">
+                            <button class="btn btn btn-secondary" type="button" >
+                            <span class="fa fa-stop" aria-hidden="true"></span> Cancel</button>
+                        </a>
+                    </div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

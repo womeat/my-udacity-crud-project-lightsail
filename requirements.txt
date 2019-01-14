@@ -1,0 +1,9 @@
+itsdangerous==1.1.0
+Flask_HTTPAuth==3.2.4
+requests==2.21.0
+Flask==1.0.2
+passlib==1.7.1
+httplib2==0.12.0
+SQLAlchemy==1.2.15
+google_api_python_client==1.7.7
+psycopg2==2.7.4

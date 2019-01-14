@@ -1,0 +1,83 @@
+.meatTpeSection {
+    background-color: floralwhite;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.taco-item {
+	padding: 20px;
+	margin: 20px;
+	margin-left: -20px;
+}
+.taco-title {
+    color: darkolivegreen;
+    font-size: 25px;
+    font-style: bold;
+}
+.taco-price {
+	font-weight: 700;
+}
+.taco-picture {
+	text-align: center;
+}
+.taco-description {
+    text-align: justify;
+    font-family: sans-serif;
+    color: dimgrey;
+    font-size: 15px;
+}
+.footer {
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+}
+
+img {
+   border-radius: 30%;
+   height: 150px;
+   width: 150px;
+}
+
+/* Taller footer on small screens */
+@media (max-width: 34em) {
+
+    .footer {
+      height: 100px;
+    }
+}
+
+/* Sticky footer style and color
+-------------------------------------------------- */
+footer {
+  padding-top: 30px;
+  background-color: #292c2f;
+  color: #bbb;
+}
+
+footer a {
+  color: #999;
+  text-decoration:none;
+}
+
+footer a:hover, footer a:focus {
+  color: #aaa;
+  text-decoration:none;
+  border-bottom:1px dotted #999;
+}
+
+footer .form-control {
+    background-color: #1f2022;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    border: none;
+    resize: none;
+    color: #d1d2d2;
+    padding: 0.7em 1em;
+}
+
+.form-group.required .control-label:after { 
+   content:"*";
+   color:red;
+}

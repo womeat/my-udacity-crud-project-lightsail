@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{{ place.name }}</h1>
+     <br />
+   {% if user_id == place.user_id %}
+        	<a href="{{url_for('newTaco', place_id = place.id )}}">
+				<button class="btn btn-primary">
+					<span class="fa fa-plus" aria-hidden="true"></span> Add Taco
+				</button>
+			</a>
+    {% endif %}
+
+
+{% endblock %}
+{% block content %}
+
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='imagemodal.css') }}">
+	{% if items !=[] %}
+		<div class="row">
+			<div class="col-md-5 meatTpeSection rounded" style="">
+		    <h2 style="color: crimson">Beef</h2>
+			{% for i in items %}
+				{% if i.meat_type.name == 'Beef' %}
+					<div class="taco-item">
+						<p class="taco-title">{{i.name}}</p>
+						<p class="taco-description">{{i.description}}</p>
+						<p class="taco-price">Price: $ {{i.price}}</p>
+                        <p class="taco-picture"><img id="myImg" onclick="test(this)"  src="{{i.picture}}" alt="{{i.name}}" onerror="this.onerror=null;this.src='/static/taco.png';" /></p>
+                        {% if user_id == i.user_id %}
+                            <a href="{{url_for('editTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" title="To do some changes to your place"><i class="fa fa-edit fa-lg" style="font-size:20px; "> </i></a>
+                            <a href="{{url_for('deleteTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-danger" data-toggle="confirmation" data-title="Are you sure you want to delete?" role="button" aria-pressed="true" title="Danger, you are trying to delete this place!!!" ><i class="fa fa-trash fa-lg" style="font-size:20px; "></i></a>
+                        {% endif %}
+					</div>
+        		{% endif %}
+			{% endfor %}
+			</div>
+			<div class="col-md-5 meatTpeSection rounded">
+		    <h2 style="color: coral">Chicken</h2>
+			{% for i in items %}
+				{% if i.meat_type.name == 'Chicken' %}
+                    <div class="taco-item">
+                      <p class="taco-title">{{i.name}}</p>
+                      <p class="taco-description">{{i.description}}</p>
+                      <p class="taco-price">Price: $ {{i.price}}</p>
+                      <p class="taco-picture"><img id="myImg" onclick="test(this)"  src="{{i.picture}}" alt="{{i.name}}" onerror="this.onerror=null;this.src='/static/taco.png';" /></p>
+                      {% if user_id == i.user_id %}
+                            <a href="{{url_for('editTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" title="To do some changes to your place"><i class="fa fa-edit fa-lg" style="font-size:20px; "> </i></a>
+                            <a href="{{url_for('deleteTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-danger" data-toggle="confirmation" data-title="Are you sure you want to delete?" role="button" aria-pressed="true" title="Danger, you are trying to delete this place!!!" ><i class="fa fa-trash fa-lg" style="font-size:20px; "></i></a>
+                        {% endif %}
+
+                    </div>
+				{% endif %}
+			{% endfor %}
+			</div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 meatTpeSection rounded">
+                <h2 style="color: hotpink">Pork</h2>
+                {% for i in items %}
+                  {% if i.meat_type.name == 'Pork' %}
+                  <div class="taco-item">
+                    <p class="taco-title">{{i.name}}</p>
+                    <p class="taco-description">{{i.description}}</p>
+                    <p class="taco-price">Price: $ {{i.price}}</p>
+                    <p class="taco-picture"><img id="myImg" onclick="test(this)" src="{{i.picture}}" alt="{{i.name}}" onerror="this.onerror=null;this.src='/static/taco.png';" /></p>
+                      {% if user_id == i.user_id %}
+                            <a href="{{url_for('editTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" title="To do some changes to your place"><i class="fa fa-edit fa-lg" style="font-size:20px; "> </i></a>
+                            <a href="{{url_for('deleteTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-danger" data-toggle="confirmation" data-title="Are you sure you want to delete?" role="button" aria-pressed="true" title="Danger, you are trying to delete this place!!!" ><i class="fa fa-trash fa-lg" style="font-size:20px; "></i></a>
+                        {% endif %}
+                  </div>
+                  {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-5 meatTpeSection rounded">
+            <h2 style="color: green">Veggie</h2>
+            {% for i in items %}
+              {% if i.meat_type.name == 'Veggie' %}
+              <div class="taco-item">
+                <p class="taco-title">{{i.name}}</p>
+                <p class="taco-description">{{i.description}}</p>
+                <p class="taco-price">Price: $ {{i.price}}</p>
+                <p class="taco-picture"><img id="myImg" onclick="test(this)"  src="{{i.picture}}" alt="{{i.name}}" onerror="this.onerror=null;this.src='/static/taco.png';" /></p>
+                      {% if user_id == i.user_id %}
+                            <a href="{{url_for('editTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" title="To do some changes to your place"><i class="fa fa-edit fa-lg" style="font-size:20px; "> </i></a>
+                            <a href="{{url_for('deleteTaco',place_id=place.id, taco_id=i.id)}}" class="btn btn-outline-danger" data-toggle="confirmation" data-title="Are you sure you want to delete?" role="button" aria-pressed="true" title="Danger, you are trying to delete this place!!!" ><i class="fa fa-trash fa-lg" style="font-size:20px; "></i></a>
+                        {% endif %}
+
+                </div>
+              {% endif %}
+            {% endfor %}
+            </div>
+		</div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal text-center">
+      <!-- The Close Button -->
+      <span class="close">&times;</span>
+      <!-- Modal Content (The Image) -->
+      <img  id="img01"  style="width: 50%; height: 50%; border-radius:5%;" class="center">
+    </div>
+    <script type="text/javascript">
+      // Get the modal
+
+
+      // Get the image and insert it inside the modal - use its "alt" text as a caption
+      var img = document.getElementById('myImg');
+      var modalImg = document.getElementById("img01");
+      var modal = document.getElementById('myModal');
+
+      function test(obj){
+        console.log(obj.src);
+        modal.style.display = "block";
+        modalImg.src = obj.src;
+      }
+
+      var span = document.getElementsByClassName("close")[0];
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        console.log(span)
+        modal.style.display = "none";
+      }
+
+      // Get the <span> element that closes the modal
+
+    </script>    
+
+	{% endif %}
+{% endblock %}

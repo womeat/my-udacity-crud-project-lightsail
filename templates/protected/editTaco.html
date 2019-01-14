@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block header %}
+   <h1>Edit taco "{{taco.name}}"</h1>
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{ url_for('editTaco',place_id = place.id, taco_id=taco.id)}}" method = "post">
+				<div class="form-group required">
+					<label for="name" class="control-label">Name:</label>
+					<input type ="text" class="form-control" name="name" value="{{taco.name}}">
+					<label for="description" class="control-label">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description"  >{{taco.description}}</textarea>
+					<label for="price">Price:</label>
+					<input type ="text" class="form-control" name="price" value="{{taco.price}}">
+                    <label for="meatTypeName" class="control-label">Meat Type:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName1" value="1" checked="checked">Pork
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName2" value="2">Beef
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName3" value="3">Chiken
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName4" value="4">Veggie
+					  </label>
+					</div>
+                    <label for="urlpic">Picture URL:</label>
+                    <input type ="text" class="form-control" maxlength="255" name="urlpic" value="{{taco.picture }}">
+                    <div class="padding-bottom"></div>
+					
+					<div class="padding-bottom text-right">
+					<button type="submit" class="btn btn btn-primary" id="submit" type="submit">
+                        <span class="fa fa-pencil" aria-hidden="true"></span>Save</button>
+                        <a href = "{{url_for('showTacos', place_id=place.id)}}">
+                            <button class="btn btn btn-secondary" type="button" >
+                            <span class="fa fa-stop" aria-hidden="true"></span> Cancel</button>
+                        </a>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+{% endblock %}

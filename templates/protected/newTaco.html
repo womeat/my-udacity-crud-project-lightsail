@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block header %}
+        <h1>New Taco</h1>
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{url_for('newTaco',place_id=place.id)}}" method = "post">
+				<div class="form-group required">
+					<label for="name" class="control-label">Name:</label>
+					<input type ="text" maxlength="50" class="form-control" name="name"placeholder="Taco name" required>
+
+					<label for="description" class="control-label">Description:</label>
+					<textarea class="form-control" maxlength="250" rows="3" name="description" placeholder="Description of the taco" required></textarea>
+
+					<label for="price">Price:</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type ="text" class="form-control" maxlength="10" name="price" placeholder="Price in $">
+					</div>
+					<label for="meatTypeName" class="control-label">Meat Type:</label>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName1" value="1" checked="checked">Pork
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName2" value="2">Beef
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName3" value="3">Chiken
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="meatTypeName" id="meatTypeName4" value="4">Veggie
+					  </label>
+					</div>
+					<label for="picture">Picture URL:</label>
+                        <textarea class="form-control" maxlength="250" rows="2" name="picture" placeholder="Picture"></textarea>
+                    <div class="form-group text-right">
+                        <button type="submit" class="btn btn-primary" id="submit" type="submit">
+                            <span class="fa fa-plus" aria-hidden="true"></span> Create</button>
+                        <a href = "{{url_for('showPlaces')}}">
+                            <button class="btn btn btn-secondary" type="button" >
+                            <span class="fa fa-stop" aria-hidden="true"></span> Cancel</button>
+                        </a>
+
+                    </div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block header %}
+   <br />
+   {% if user_id %}
+        <a href="{{url_for('newPlace')}}" class="btn btn-outline-primary " role="button" aria-pressed="true"><i class="fa fa-plus fa-lg" style="font-size:20px; "> New place</i></a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='table.css') }}">
+<div class="row table-users bg-white">
+   <table cellspacing="0" border="0">
+      <tr>
+         <th></th>
+         <th>Place name</th>
+         <th></th>
+         <th>Rate</th>
+      </tr>
+			{% for place in places %}
+        <tr>
+	         <td align="center"><img src="{{place.picture}}" alt="{{place.name}}" onerror="this.onerror=null;this.src='/static/foodtruck.png';" /></td>
+	         <td align="left">
+                        {{place.name}}
+                        <hr />
+                        
+                        <a href="{{url_for('showTacos',place_id=place.id)}}" class="btn btn-outline-primary" role="button" aria-pressed="true" title="View the list of Tacos!"><i class="fa fa-eye fa-lg" style="font-size:20px;"></i></a>
+                        {% if user_id == place.user_id %}
+                        <a href="{{url_for('editPlace',place_id=place.id)}}" class="btn btn-outline-secondary" role="button" aria-pressed="true" title="To do some changes to your place"><i class="fa fa-edit fa-lg" style="font-size:20px; "> </i></a>
+                        <a href="{{url_for('deletePlace',place_id=place.id)}}" class="btn btn-outline-danger" data-toggle="confirmation" data-title="Are you sure you want to delete?" role="button" aria-pressed="true" title="Danger, you are trying to delete this place!!!" ><i class="fa fa-trash fa-lg" style="font-size:20px; "></i></a>
+                        {% endif %}
+             </td>
+            <td></td>
+	         <td align="left">
+                {% if place.rate.rate %}
+                 {% for x in range(place.rate.rate) %}
+	                 <i class="fa fa-star" style="font-size:20px; color: chartreuse"></i>
+	             {% endfor %}
+	             {% endif %}
+	             {% if place.rate.rate==0 %}
+	                 <i class="fa fa-star-o" style="font-size:20px; color: chartreuse"></i>
+	              {% endif %}
+	           </td>
+	      </tr>
+			{% endfor %}
+   </table>
+</div>
+
+{% endblock %}

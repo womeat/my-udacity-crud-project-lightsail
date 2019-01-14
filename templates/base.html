@@ -1,0 +1,52 @@
+{% include "header.html" %}
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar navbar-toggleable-md navbar-inverse  bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('showPlaces') }}">All places</a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <ul class="navbar-nav">
+            {% if username %}
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Connected as: {{ username }}<span class="sr-only">(current)</span></a>
+                </li>
+              <li class="nav-item"><span></span>
+                <a class="nav-link" href="{{ url_for('disconnect') }}">Log Out</a>
+              </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Sign up</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('showLogin') }}">Log In</a>
+              </li>    
+        {% endif %}
+        </ul>
+      </div>  
+    </nav>
+
+<div class="container" >
+    <div class="row">
+        <div class="col-sm-12" id="myAlerts">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+          <strong>{{ message }}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+  <div class="clearfix">
+    <div class="col-sm-12">
+        <header>
+        {% block header %}{% endblock %}
+        </header>
+        {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}

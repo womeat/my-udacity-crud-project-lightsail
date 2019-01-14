@@ -1,70 +1,60 @@
-/etc/apache2/sites-enabled/000-default.conf
-
-###### *************************
-In the server:
-
-sudo useradd grader
-cd /home/grader/
-mkdir .ssh
-touch ~/.ssh/authorized_keys
-# Copy the public key generated in your localhost
-vi ~/.ssh/authorized_keys
-chmod 700 .ssh/
-chmod 644 .ssh/authorized_keys
-# Disable the user/psw access and allow only access using keys
-# set PasswordAuthentication no
-sudo vi /etc/ssh/sshd_config
-
-# Allow the sudo role to the user grader
-# login with a different sudo account
-sudo vi /etc/sudoers.d/grader
-
-# File content
-# Created by cloud-init v. 17.2 on Sun, 13 Jan 2019 22:45:03 +0000
-# User rules for ubuntu
-grader ALL=(ALL) NOPASSWD:ALL
+# Best Tacos
+The [original project](https://github.com/womeat/my-udacity-crud-project) which works locally was modified to work with AWS lightsail.
 
 
-## Modify the Firewall rules
+## Deployment details
+- IP: 34.218.66.67
+- URL: http://34.218.66.67
 
-sudo ufw status
-# disable all the incoming ports
-sudo ufw default deny incoming
-# allow all the outgoing ports
-sudo ufw default allow outgoing
-# allow ssh access
-sudo ufw allow ssh
-sudo ufw allow 2200/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 123/tcp
+## Software installed
+- apache2
+- postgresql
+- libapache2-mod-wsgi
+- python-pip
 
-sudo ufw enable
+## Configuration made
+1. Changes were made in the firewall to accept only the protocols:
+- HTTP
+- NTP
+- SSH
+2. Root access was disable in the server and a Key-based SSH authentication was enforced. The changes were made in the the file `/etc/ssh/sshd_config`.
+3. The user `grader` was created with `sudo` permissions.
+4. The postgres user `besttacos` and database `besttacos` where created
+5. The script `myapp.wsgi` was and added to the mod_wsgi configuration `/etc/apache2/sites-enabled/000-default.conf`
+```
+<VirtualHost *:80>
+        ServerAdmin womeat@gmail.com
+        DocumentRoot /var/www/html
 
-#change the ssh port to 2200 in the following file
-sudo vi /etc/ssh/sshd_config
-#restart the ssh service
-sudo service ssh restart
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-# Install apache2
-sudo apt-get install apache2
+        WSGIDaemonProcess myapp threads=5 python-path=/home/grader/my-udacity-crud-project \
+                python-home=/home/grader/my-udacity-crud-project/env
 
+        WSGIProcessGroup myapp
+        WSGIApplicationGroup %{GLOBAL}
 
-# Install postgres  and create the user and database
-grader@ip-172-26-3-190:~/my-udacity-crud-project$ sudo -u postgres createuser besttacos
-grader@ip-172-26-3-190:~/my-udacity-crud-project$ sudo -u postgres createdb besttacos
-grader@ip-172-26-3-190:~/my-udacity-crud-project$ sudo -u postgres psql
-psql (9.5.14)
-Type "help" for help.
+        WSGIScriptAlias / /home/grader/my-udacity-crud-project/myapp.wgsi
 
-postgres=# alter user besttacos with encrypted password 'xxxxx';
+        <Directory /home/grader/my-udacity-crud-project>
+           WSGIProcessGroup myapp
+           WSGIApplicationGroup %{GLOBAL}
+           Require all granted
+        </Directory>
+</VirtualHost>
 
+```
+6. The SQLAlchemy engine in the python scripts were configure to work with Postgres.
+```
+engine = create_engine('postgres://besttacos:XXXXX@localhost:5432/besttacos')
+```
+7.
 
-###### *************************
-In your localhost:
-
-sudo useradd grader
-ssh-keygen
-# previous command creates two files, your public and private key
-
-#login into the server
-ssh -p 2200 -i grader grader@34.218.66.67
+# References
+mod_wsgi (Apache)
+- http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/
+SQLAlchemy Engine Configuration
+- https://docs.sqlalchemy.org/en/latest/core/engines.html
+Firewall configuration (UFW)
+- https://help.ubuntu.com/community/UFW

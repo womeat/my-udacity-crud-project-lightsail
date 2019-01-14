@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+   <h1>Edit "{{place.name}}"</h1>
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-6 col-md-offset-1 padding-top">
+			<form action="{{ url_for('editPlace',place_id = place.id)}}" method = "post">
+				<div class="form-group required">
+					<label for="name" class="control-label">Name:</label>
+					<input type ="text" class="form-control" name="name" value="{{place.name }}" required>
+                    <label for="urlpic">Picture URL:</label>
+                    <input type ="text" class="form-control" maxlength="255" name="urlpic" value="{{place.picture }}">
+                    <label for="rate">Rate:</label><br />
+                        <input type="radio" class="btn btn-secondary" name="rate" value="2" checked="checked">1 - Poor<br/>
+                        <input type="radio" class="btn btn-secondary" name="rate" value="3">2 - Fair<br/>
+                        <input type="radio" class="btn btn-secondary" name="rate" value="4">3 - Good<br/>
+                        <input type="radio" class="btn btn-secondary" name="rate" value="5">4 - Very Good<br/>
+                        <input type="radio" class="btn btn-secondary" name="rate" value="6">5 - Excellent<br/>
+                    <div class="padding-bottom"></div>
+					
+					<div class="padding-bottom text-right">
+					<button type="submit" class="btn btn btn-primary" id="submit" type="submit">
+                        <span class="fa fa-pencil" aria-hidden="true"></span>Save</button>
+                        <a href = "{{url_for('showPlaces')}}">
+                            <button class="btn btn btn-secondary" type="button" >
+                            <span class="fa fa-stop" aria-hidden="true"></span> Cancel</button>
+                        </a>
+                    </div>
+                </div>
+			</form>
+		</div>
+	</div>
+{% endblock %}
